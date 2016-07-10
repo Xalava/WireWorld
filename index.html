@@ -9,7 +9,7 @@
 
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
         <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
 
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
@@ -23,7 +23,7 @@
             <header class=" jumbotron">
 
                 <h1> Wireworld </h1>
-                <p>Wireworld simulate an electronic Circuit. It is Turing complete despite its simplicity.   <a class="btn btn-info"  href="#Infos">Learn More</a></p>
+                <p>The simple logic circuit simulator  <a class="btn btn-info"  href="#Infos">Learn More</a></p>
 
             </header>
 
@@ -39,6 +39,8 @@
                     </table>
                 </div>
                 <button class="btn btn-default" onclick="daGame.refresh()">Refresh <span class="badge">{{cycle}}</span></button>
+                <!-- <button class="btn btn-default" onclick="daGame.autoRefresh()">AutoRefresh </button> -->
+
             </section>
 
             <script type="text/x-template" id="square-template" >
@@ -51,22 +53,26 @@
             <section id="Infos" class="row">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <h2>Manual</h2>
-                        <p> right click → put or remove a connector</p>
-                        <p> left click → put or remove a sparkle (Electron Head)</p>
+                        <h2>Principle</h2>
+                        <p>Wireworld is a cellular automaton. Sparkles  are propagated along wires. Despite it's simplicity, it is turing complete and allows to simulate advanced computers.
+
+                        <h2>Use</h2>
+                        <p> right click (or simple tap)→ put or remove a wire</p>
+                        <p> left click (or long press) → put or remove a sparkle (Electron Head)</p>
+                        <p> Then press refresh to iterate</p>
 
                         <h2>Rules</h2>
 
                         <p>A Wireworld cell can be in one of four different states, usually numbered 0 to 3 in software.</p>
 
                         <ul>
-                            <li>Empty (Black)</li>
-                            <li>Electron head (Blue)</li>
-                            <li>Electron tail (Red)</li>
-                            <li>Conductor (Yellow)</li>
+                            <li class=""><span class="empty"> Empty </span></li>
+                            <li class=""><span class="head">Electron head (Sparkle)</span></li>
+                            <li class=""><span class="tail"> Electron tail </span></li>
+                            <li class=""><span class="connector"> Conductor (Wire)</span></li>
                         </ul>
 
-                        <p>As in all cellular automata, time proceeds in discrete steps called generations (sometimes "gens" or "ticks"). Cells behave as follows:</p>
+                        <p>As in all cellular automata, time proceeds in discrete steps called generations. Cells behave as follows:</p>
 
                         <ul>
                             <li>Empty → Empty</li>
@@ -91,9 +97,9 @@
 
         <script src="js/vendor/vue.js"></script>
 
-        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <!-- <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> -->
         <script src="js/plugins.js"></script>
 
         <script src="js/game.js"></script>

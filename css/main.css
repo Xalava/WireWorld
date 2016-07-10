@@ -114,25 +114,26 @@ footer {
 }
 
 .empty {
-    background-color: #222;
+    background-color: rgba(30,30,30,0.3);
 }
 
 .head {
-    background-color: red;
+    background-color: #6020Cf;
 }
 
 .tail{
-    background-color: #0080ff
+    background-color: #FF4000;
 ;
 }
 
 .connector {
     background-color: yellow;
+    color: #333;
 }
 
 .theGrid{
     border-collapse:collapse ;
-    background-color: #222;
+    background-color: rgba(30,30,30,0.3);
     table-layout: fixed;
     margin: auto auto;
 
@@ -140,12 +141,14 @@ footer {
 td{
     width: 30px; 
     height:30px;
-
     border: 0.4px solid #AAA;
  
 }
 
-
+#Infos {
+    color: #DDD;
+    background-color:rgba(50,50,50,0.7);
+}
 
 
 

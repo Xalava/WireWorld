@@ -8,9 +8,10 @@ window.onload = function () {
 
 
 
-    var promise = launchGame();
-	console.log("back from launching");
-	window.setTimeout( window.setInterval(daGame.refresh(), 800), 4000)
+    var currentGame = launchGame();
+ //    currentGame.refresh()
+	// console.log("back from launching");
+	// window.setTimeout( 
 
 
 	
@@ -54,7 +55,7 @@ function launchGame() {
 				}, // !??
 				computed: {
 					isHead: function () {
-						if (this.state == 1) {
+						if (this.state == Game.HEAD) {
 							return true;
 						} else {
 							return false;

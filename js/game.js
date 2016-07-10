@@ -3,10 +3,12 @@ var Game = function (mapY, mapX) {
 
 	this.mapX = mapX;
 	this.mapY = mapY;
-	this.board = this.generateMap(mapY, mapX);
+	// this.board = this.generateMap(mapY, mapX);
 	this.iteration = 0;
 	console.log("game created");
-	// setInterval(this.refresh(), 800);
+
+	// Demo
+	this.board=this.demoFill(mapY,mapX);
 };
 
 Game.EMPTY = 0;
@@ -20,6 +22,7 @@ Game.prototype.generateMap = function (mapY, mapX) {
 	for (var j = mapY - 1; j >= 0; j--) {
 		map[j] = [];
 		for (var i = mapX - 1; i >= 0; i--) {
+
 			map[j][i] = {
 				state: Game.EMPTY,
 				priorState: Game.EMPTY,
@@ -27,11 +30,50 @@ Game.prototype.generateMap = function (mapY, mapX) {
 				row: j
  				//  could add random connectors
 			}
+
 		}
 	} //end double for
+
+	
+
 	return map;
 
 }
+
+Game.prototype.demoFill = function (mapY,mapX) {
+	var map = this.generateMap(mapY,mapX);
+	var midY = Math.floor(mapY/2);
+	var firstTierX = Math.floor(mapX*2/5);
+	var lastTierX = Math.floor(mapX*3/5)
+
+
+	// main wires
+	for (var j = midY - 1; j <=midY+1; j+=2) {
+		for (var i = lastTierX;  i>= firstTierX; i--) {
+			map[j][i].state = Game.CONDUCTOR;
+		}
+	} //end double for
+
+	//Corners
+	map[midY][firstTierX-1].state=Game.CONDUCTOR;
+	map[midY][lastTierX+1].state=Game.CONDUCTOR;
+
+	//sparkles
+
+	map[midY-1][firstTierX+1].state=Game.HEAD;
+	map[midY+1][lastTierX-1].state=Game.HEAD;
+
+	//in contact with tails
+	map[midY-1][firstTierX].state=Game.TAIL;
+	map[midY+1][lastTierX].state=Game.TAIL;
+
+
+
+	return map;
+
+}
+
+
 
 Game.prototype.squareLeftAction = function (y, x) {
 	var cs = this.board[y][x];
@@ -74,12 +116,24 @@ Game.prototype.adjacentCells = function (y, x) {
 	var adjacent= [];
 	if (x - 1 >= 0 ) {
 		adjacent.push(this.board[y][x - 1])
+		if (y + 1 < this.mapY ) {
+			adjacent.push(this.board[y + 1][x-1])
+		}
+		if (y - 1 >= 0 ) {
+			adjacent.push(this.board[y - 1][x-1])
+		}
 	}
 	if (y + 1 < this.mapY ) {
 		adjacent.push(this.board[y + 1][x])
 	}
 	if (x + 1 < this.mapX ) {
 		adjacent.push(this.board[y][x + 1])
+		if (y + 1 < this.mapY ) {
+			adjacent.push(this.board[y + 1][x+1])
+		}
+		if (y - 1 >= 0 ) {
+			adjacent.push(this.board[y - 1][x+1])
+		}
 	}
 	if (y - 1 >= 0 ) {
 		adjacent.push(this.board[y - 1][x])
@@ -142,6 +196,11 @@ Game.prototype.refresh = function () {
 	}
 	console.log("refresh");
 	this.iteration +=1;
+
+}
+Game.prototype.autoRefresh = function () {
+
+    window.setInterval(this.refresh, 800);
 
 }
 
