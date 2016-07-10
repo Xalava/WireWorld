@@ -3,38 +3,54 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title></title>
+        <title>Wireworld - Cellular Automaton</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
-        <!-- Place favicon.ico in the root directory -->
 
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
-        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+        <div class="container">
+            <h1> Wireworld </h1>
+            <p>This is a javascript implementation of Wireworld. Wireworld is a cellular automaton. Despite its simplicity it is turing complete (it can perform any calculation)</p>
 
-        <!-- Add your site or application content here -->
-        <p>Hello world! This is HTML5 Boilerplate.</p>
+            <h2>Rules</h2>
+
+            <p>A Wireworld cell can be in one of four different states, usually numbered 0 to 3 in software.</p>
+
+            <ul>
+                <li>Empty (Black)</li>
+                <li>Electron head (Blue)</li>
+                <li>Electron tail (Red)</li>
+                <li>Conductor (Yellow)</li>
+            </ul>
+
+            <p>As in all cellular automata, time proceeds in discrete steps called generations (sometimes "gens" or "ticks"). Cells behave as follows:</p>
+
+            <ul>
+                <li>Empty → Empty</li>
+                <li>Electron head → Electron tail</li>
+                <li>Electron tail → Conductor</li>
+                <li>Conductor → Electron head if exactly one or two of the neighbouring cells are electron heads, or remains Conductor otherwise.</li>
+            </ul>
+
+            <p>Wireworld uses what is called the Moore neighborhood, which means that in the rules above, neighbouring means one cell away (range value of one) in any direction, both orthogonal and diagonal.</p>
+
+            <p><a href="https://en.wikipedia.org/wiki/Wireworld">Learn more on wikipedia</a></p>
+
+
 
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
+        <script src="js/vendor/vue.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
 
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-            e.src='https://www.google-analytics.com/analytics.js';
-            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
-        </script>
     </body>
 </html>
