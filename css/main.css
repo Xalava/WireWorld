@@ -94,17 +94,56 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
-
-.footer {
+body{
+    background-color: black;
+    background-image: url("../img/glass.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.jumbotron{
+    background-color: rgba(250,250,250,0.6)
+}
+section{
+    margin-bottom: 2rem;
+}
+footer {
   padding-top: 19px;
   color: #777;
   border-top: 1px solid #e5e5e5;
 }
 
+.empty {
+    background-color: #222;
+}
 
+.head {
+    background-color: red;
+}
 
+.tail{
+    background-color: #0080ff
+;
+}
 
+.connector {
+    background-color: yellow;
+}
 
+.theGrid{
+    border-collapse:collapse ;
+    background-color: #222;
+    table-layout: fixed;
+    margin: auto auto;
+
+}
+td{
+    width: 30px; 
+    height:30px;
+
+    border: 0.4px solid #AAA;
+ 
+}
 
 
 

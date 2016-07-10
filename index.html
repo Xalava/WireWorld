@@ -23,22 +23,37 @@
             <header class=" jumbotron">
 
                 <h1> Wireworld </h1>
-                <p>Wireworld is a cellular automaton. Each cell react to its environment. Despite its simplicity it can perform any calculation <a class="btn btn-info"  href="#Infos">Learn More</a></p>
+                <p>Wireworld simulate an electronic Circuit. It is Turing complete despite its simplicity.   <a class="btn btn-info"  href="#Infos">Learn More</a></p>
 
             </header>
 
             <section id="game" class="row">
-                <table class="gridy">
-                    <tr v-for="row in rows"> 
-                        <td  v-for="square in row" is="square-component" :sq="square">
-                        </td> 
-                    </tr>
-                </table>
+
+                <div class="col-md-12">
+
+                    <table class="theGrid">
+                        <tr v-for="row in rows"> 
+                            <td  v-for="square in row" is="square-component" :sq="square">
+                            </td> 
+                        </tr>
+                    </table>
+                </div>
+                <button class="btn btn-default" onclick="daGame.refresh()">Refresh <span class="badge">{{cycle}}</span></button>
             </section>
+
+            <script type="text/x-template" id="square-template" >
+                <td  class="text-center" :class="stateClass" v-on:click="sqLeftAction" @contextmenu.prevent="sqRightAction">
+                  <span :class="{ 'glyphicon':true, 'glyphicon-flash': isHead}"></span>
+
+                </td>
+            </script>
 
             <section id="Infos" class="row">
                 <div class="panel panel-default">
                     <div class="panel-body">
+                        <h2>Manual</h2>
+                        <p> right click → put or remove a connector</p>
+                        <p> left click → put or remove a sparkle (Electron Head)</p>
 
                         <h2>Rules</h2>
 
@@ -74,12 +89,14 @@
         </div> <!-- endContainer -->
 
 
+        <script src="js/vendor/vue.js"></script>
 
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
-        <script src="js/vendor/vue.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
         <script src="js/plugins.js"></script>
+
+        <script src="js/game.js"></script>
         <script src="js/main.js"></script>
 
     </body>
