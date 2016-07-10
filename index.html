@@ -8,47 +8,77 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
+
     </head>
     <body>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         <div class="container">
-            <h1> Wireworld </h1>
-            <p>This is a javascript implementation of Wireworld. Wireworld is a cellular automaton. Despite its simplicity it is turing complete (it can perform any calculation)</p>
+            <header class=" jumbotron">
 
-            <h2>Rules</h2>
+                <h1> Wireworld </h1>
+                <p>Wireworld is a cellular automaton. Each cell react to its environment. Despite its simplicity it can perform any calculation <a class="btn btn-info"  href="#Infos">Learn More</a></p>
 
-            <p>A Wireworld cell can be in one of four different states, usually numbered 0 to 3 in software.</p>
+            </header>
 
-            <ul>
-                <li>Empty (Black)</li>
-                <li>Electron head (Blue)</li>
-                <li>Electron tail (Red)</li>
-                <li>Conductor (Yellow)</li>
-            </ul>
+            <section id="game" class="row">
+                <table class="gridy">
+                    <tr v-for="row in rows"> 
+                        <td  v-for="square in row" is="square-component" :sq="square">
+                        </td> 
+                    </tr>
+                </table>
+            </section>
 
-            <p>As in all cellular automata, time proceeds in discrete steps called generations (sometimes "gens" or "ticks"). Cells behave as follows:</p>
+            <section id="Infos" class="row">
+                <div class="panel panel-default">
+                    <div class="panel-body">
 
-            <ul>
-                <li>Empty → Empty</li>
-                <li>Electron head → Electron tail</li>
-                <li>Electron tail → Conductor</li>
-                <li>Conductor → Electron head if exactly one or two of the neighbouring cells are electron heads, or remains Conductor otherwise.</li>
-            </ul>
+                        <h2>Rules</h2>
 
-            <p>Wireworld uses what is called the Moore neighborhood, which means that in the rules above, neighbouring means one cell away (range value of one) in any direction, both orthogonal and diagonal.</p>
+                        <p>A Wireworld cell can be in one of four different states, usually numbered 0 to 3 in software.</p>
 
-            <p><a href="https://en.wikipedia.org/wiki/Wireworld">Learn more on wikipedia</a></p>
+                        <ul>
+                            <li>Empty (Black)</li>
+                            <li>Electron head (Blue)</li>
+                            <li>Electron tail (Red)</li>
+                            <li>Conductor (Yellow)</li>
+                        </ul>
+
+                        <p>As in all cellular automata, time proceeds in discrete steps called generations (sometimes "gens" or "ticks"). Cells behave as follows:</p>
+
+                        <ul>
+                            <li>Empty → Empty</li>
+                            <li>Electron head → Electron tail</li>
+                            <li>Electron tail → Conductor</li>
+                            <li>Conductor → Electron head if exactly one or two of the neighbouring cells are electron heads, or remains Conductor otherwise.</li>
+                        </ul>
+
+                        <p>Wireworld uses what is called the Moore neighborhood, which means that in the rules above, neighbouring means one cell away (range value of one) in any direction, both orthogonal and diagonal.</p>
+
+                        <p><a href="https://en.wikipedia.org/wiki/Wireworld">Learn more on wikipedia</a></p>
+                    </div>
+                </div>
+            </section>  
+
+            <footer class="row text-center">  
+                <p>With ♥ from <a href="https://www.linkedin.com/in/lavayssiere">Xavier </a></p>
+                  
+            </footer>
+        </div> <!-- endContainer -->
 
 
 
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
         <script src="js/vendor/vue.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
 
