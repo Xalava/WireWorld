@@ -23,7 +23,7 @@
             <header class=" jumbotron">
 
                 <h1> Wireworld </h1>
-                <p>The simple logic circuit simulator  <a class="btn btn-info"  href="#Infos">Learn More</a></p>
+                <p>Simple logic circuit simulator  <a class="btn btn-info"  href="#Infos">Learn More</a></p>
 
             </header>
 
@@ -38,8 +38,15 @@
                         </tr>
                     </table>
                 </div>
-                <button class="btn btn-default" onclick="daGame.refresh()">Refresh <span class="badge">{{cycle}}</span></button>
-                <!-- <button class="btn btn-default" onclick="daGame.autoRefresh()">AutoRefresh </button> -->
+
+                <div class="col-md-12 text-center">
+                    <br/>
+                    <div class="btn-group ">
+                        <button class="btn btn-default" onclick="daGame.refresh()">Refresh <span class="badge">{{cycle}}</span></button>
+                        <button class="btn btn-default" onclick="daGame.autoRefresh()">AutoRefresh </button>
+                        <button class="btn btn-default" onclick="daGame.autoRefreshStop()">Stop</button>
+                    </div>
+                </div>
 
             </section>
 
@@ -51,41 +58,70 @@
             </script>
 
             <section id="Infos" class="row">
-                <div class="panel panel-default">
-                    <div class="panel-body">
                         <h2>Principle</h2>
-                        <p>Wireworld is a cellular automaton. Sparkles  are propagated along wires. Despite it's simplicity, it is turing complete and allows to simulate advanced computers.
+                        <p>Wireworld is a cellular automaton. Sparkles are propagated along wires at each cycle. Despite it's simplicity, it allows to simulate advanced computers and is Turing complete
 
                         <h2>Use</h2>
-                        <p> right click (or simple tap)→ put or remove a wire</p>
-                        <p> left click (or long press) → put or remove a sparkle (Electron Head)</p>
-                        <p> Then press refresh to iterate</p>
+                        <p> Right click (or simple tap)→ put or remove a wire</p>
+                        <p> Left click (or long press) → put or remove a sparkle (Electron Head)</p>
+                        <p> Press the refresh or auto-refresh button to iterate</p>
 
                         <h2>Rules</h2>
 
-                        <p>A Wireworld cell can be in one of four different states, usually numbered 0 to 3 in software.</p>
+                        <p>A Wireworld cell can be in one of four different states: <span class="empty"> Empty </span>, <span class="head">Electron head (<span class="glyphicon glyphicon-flash"></span>)</span>, <span class="tail"> Electron tail </span>, and <span class="connector"> Connector</span>
 
-                        <ul>
-                            <li class=""><span class="empty"> Empty </span></li>
-                            <li class=""><span class="head">Electron head (Sparkle)</span></li>
-                            <li class=""><span class="tail"> Electron tail </span></li>
-                            <li class=""><span class="connector"> Conductor (Wire)</span></li>
-                        </ul>
-
-                        <p>As in all cellular automata, time proceeds in discrete steps called generations. Cells behave as follows:</p>
+                        <p>As in all cellular automate, time proceeds in discrete steps called generations. Cells behave as follows:</p>
 
                         <ul>
                             <li>Empty → Empty</li>
-                            <li>Electron head → Electron tail</li>
-                            <li>Electron tail → Conductor</li>
-                            <li>Conductor → Electron head if exactly one or two of the neighbouring cells are electron heads, or remains Conductor otherwise.</li>
+                            <li><span class="head">Electron head</span> → <span class="tail">Electron tail</span></li>
+                            <li><span class="tail">Electron tail</span> → <span class="connector">Connector</span></li>
+                            <li><span class="connector">Connector</span>
+                                <ul class="deco-none">
+                                    <li> → <span class="head">Electron head</span> if exactly one or two of the neighboring cells are electron heads</li>
+                                    <li> → remains <span class="connector">connector</span> otherwise</li>
+                                </ul>
+                            </li>
                         </ul>
 
-                        <p>Wireworld uses what is called the Moore neighborhood, which means that in the rules above, neighbouring means one cell away (range value of one) in any direction, both orthogonal and diagonal.</p>
+                        <p>In the rules above, neighboring means one cell away in any direction, both orthogonal and diagonal.</p>
 
-                        <p><a href="https://en.wikipedia.org/wiki/Wireworld">Learn more on wikipedia</a></p>
-                    </div>
-                </div>
+                        <h2> Logic gates</h2>
+                        <p> From there, you can build logic gates, taking signals in input and performing a logic operation :
+                        <ul class="media-list">
+                            <li class="media">
+                                <div class="media-left">
+                                  <a class="" href="#">
+                                    <img class="media-object" src="./img/two-diodes.gif" alt="Diodes image" width="">
+                                  </a>
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading">Diodes</h4>
+                                    If the sparkle comes from the three blocks side it goes through, otherwise it is stopped.
+                                </div>
+                            </li>
+                            <li class="media">
+                              <div class="media-body">
+                                <h4 class="media-heading">Basic computation</h4>
+                                "Or", "Xor" (exclusive or), and "And" functions
+                              </div>
+                                <div class="media-right">
+                                  <a class="" href="#">
+                                    <img class="media-object" src="./img/logic-doors.gif" alt="Diodes image" width="">
+                                  </a>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <h2> Learn more </h2>
+                        <ul>
+                            <li>More information on wireworld on <a href="https://en.wikipedia.org/wiki/Wireworld"> Wikipedia</a></li>
+
+                            <li><a href="https://unnikked.ga/simulate-logic-circuits-wireworld/">Logic gates</a> in wireworld</li>
+                            <li>Full set of gates and <a href="http://karlscherer.com/Wireworld.html">logic devices</a>
+                            <li> An advance example from our friends in <a href="https://www.logre.eu/wiki/Projet_Wireworld/en">Grenoble</li>
+                        </a>
+
             </section>  
 
             <footer class="row text-center">  

@@ -12,6 +12,7 @@ window.onload = function () {
  //    currentGame.refresh()
 	// console.log("back from launching");
 	// window.setTimeout( 
+	daGame.autoRefresh();
 
 
 	

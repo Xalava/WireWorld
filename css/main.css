@@ -136,7 +136,6 @@ footer {
     background-color: rgba(30,30,30,0.3);
     table-layout: fixed;
     margin: auto auto;
-
 }
 td{
     width: 30px; 
@@ -148,9 +147,12 @@ td{
 #Infos {
     color: #DDD;
     background-color:rgba(50,50,50,0.7);
+    padding: 2rem;
 }
 
-
+.deco-none{
+    list-style: none;
+}
 
 
 

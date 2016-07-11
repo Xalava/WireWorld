@@ -3,12 +3,13 @@ var Game = function (mapY, mapX) {
 
 	this.mapX = mapX;
 	this.mapY = mapY;
-	// this.board = this.generateMap(mapY, mapX);
 	this.iteration = 0;
 	console.log("game created");
 
-	// Demo
+	// this.board = this.generateMap(mapY, mapX);
+	// Demo version calling generate map inside
 	this.board=this.demoFill(mapY,mapX);
+
 };
 
 Game.EMPTY = 0;
@@ -33,8 +34,6 @@ Game.prototype.generateMap = function (mapY, mapX) {
 
 		}
 	} //end double for
-
-	
 
 	return map;
 
@@ -82,7 +81,7 @@ Game.prototype.squareLeftAction = function (y, x) {
 		console.log("putting conductor");
 	}else {
 
-		if(cs.state==Game.CONDUCTOR){
+		if(cs.state==Game.CONDUCTOR || cs.state==Game.HEAD || cs.state==Game.TAIL){
 			cs.state=Game.EMPTY;
 			console.log("removing conductor");
 
@@ -99,7 +98,7 @@ Game.prototype.squareRightAction = function (y, x) {
 
 	}else{
 
-		if(cs.state==Game.CONDUCTOR){
+		if(cs.state==Game.CONDUCTOR||cs.state==Game.EMPTY||cs.state==Game.TAIL){
 			cs.state=Game.HEAD;
 			console.log("adding energy");
 
@@ -188,21 +187,27 @@ Game.prototype.saveStates = function () {
 
 
 Game.prototype.refresh = function () {
-	this.saveStates();
+	//this> daGame: hugly bug fix
+	daGame.saveStates();
 	for (var r = this.mapY - 1; r >= 0; r--) {
 		for (var c = this.mapX - 1; c >= 0; c--) {
-			this.updateCell(r,c);
+			daGame.updateCell(r,c);
 		}
 	}
 	console.log("refresh");
-	this.iteration +=1;
+	daGame.iteration +=1;
 
 }
 Game.prototype.autoRefresh = function () {
 
-    window.setInterval(this.refresh, 800);
+    daGame.clock= window.setInterval(this.refresh, 800);
 
 }
 
+Game.prototype.autoRefreshStop = function () {
 
+	clearInterval(daGame.clock);
+
+
+}
 // count feature, timer ...
