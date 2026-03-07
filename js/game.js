@@ -8,7 +8,7 @@ var Game = function (mapY, mapX) {
 
 	// this.board = this.generateMap(mapY, mapX);
 	// Demo version calling generate map inside
-	this.board=this.demoFill(mapY,mapX);
+	this.board = this.demoFill(mapY, mapX);
 
 };
 
@@ -29,7 +29,7 @@ Game.prototype.generateMap = function (mapY, mapX) {
 				priorState: Game.EMPTY,
 				col: i,
 				row: j
- 				//  could add random connectors
+				//  could add random connectors
 			}
 
 		}
@@ -39,32 +39,32 @@ Game.prototype.generateMap = function (mapY, mapX) {
 
 }
 
-Game.prototype.demoFill = function (mapY,mapX) {
-	var map = this.generateMap(mapY,mapX);
-	var midY = Math.floor(mapY/2);
-	var firstTierX = Math.floor(mapX*2/5);
-	var lastTierX = Math.floor(mapX*3/5)
+Game.prototype.demoFill = function (mapY, mapX) {
+	var map = this.generateMap(mapY, mapX);
+	var midY = Math.floor(mapY / 2);
+	var firstTierX = Math.floor(mapX * 2 / 5);
+	var lastTierX = Math.floor(mapX * 3 / 5)
 
 
 	// main wires
-	for (var j = midY - 1; j <=midY+1; j+=2) {
-		for (var i = lastTierX;  i>= firstTierX; i--) {
+	for (var j = midY - 1; j <= midY + 1; j += 2) {
+		for (var i = lastTierX; i >= firstTierX; i--) {
 			map[j][i].state = Game.CONDUCTOR;
 		}
 	} //end double for
 
 	//Corners
-	map[midY][firstTierX-1].state=Game.CONDUCTOR;
-	map[midY][lastTierX+1].state=Game.CONDUCTOR;
+	map[midY][firstTierX - 1].state = Game.CONDUCTOR;
+	map[midY][lastTierX + 1].state = Game.CONDUCTOR;
 
 	//sparkles
 
-	map[midY-1][firstTierX+1].state=Game.HEAD;
-	map[midY+1][lastTierX-1].state=Game.HEAD;
+	map[midY - 1][firstTierX + 1].state = Game.HEAD;
+	map[midY + 1][lastTierX - 1].state = Game.HEAD;
 
 	//in contact with tails
-	map[midY-1][firstTierX].state=Game.TAIL;
-	map[midY+1][lastTierX].state=Game.TAIL;
+	map[midY - 1][firstTierX].state = Game.TAIL;
+	map[midY + 1][lastTierX].state = Game.TAIL;
 
 
 
@@ -76,13 +76,13 @@ Game.prototype.demoFill = function (mapY,mapX) {
 
 Game.prototype.squareLeftAction = function (y, x) {
 	var cs = this.board[y][x];
-	if(cs.state==Game.EMPTY){
-		cs.state=Game.CONDUCTOR;
+	if (cs.state == Game.EMPTY) {
+		cs.state = Game.CONDUCTOR;
 		console.log("putting conductor");
-	}else {
+	} else {
 
-		if(cs.state==Game.CONDUCTOR || cs.state==Game.HEAD || cs.state==Game.TAIL){
-			cs.state=Game.EMPTY;
+		if (cs.state == Game.CONDUCTOR || cs.state == Game.HEAD || cs.state == Game.TAIL) {
+			cs.state = Game.EMPTY;
 			console.log("removing conductor");
 
 		}
@@ -92,14 +92,14 @@ Game.prototype.squareLeftAction = function (y, x) {
 
 Game.prototype.squareRightAction = function (y, x) {
 	var cs = this.board[y][x];
-	if(cs.state==Game.TAIL || cs.state==Game.HEAD){
-		cs.state=Game.CONDUCTOR;
+	if (cs.state == Game.TAIL || cs.state == Game.HEAD) {
+		cs.state = Game.CONDUCTOR;
 		console.log("removing energy");
 
-	}else{
+	} else {
 
-		if(cs.state==Game.CONDUCTOR||cs.state==Game.EMPTY||cs.state==Game.TAIL){
-			cs.state=Game.HEAD;
+		if (cs.state == Game.CONDUCTOR || cs.state == Game.EMPTY || cs.state == Game.TAIL) {
+			cs.state = Game.HEAD;
 			console.log("adding energy");
 
 		}
@@ -111,30 +111,30 @@ Game.prototype.squareRightAction = function (y, x) {
 
 
 Game.prototype.adjacentCells = function (y, x) {
-	//returns array of adjancent cells
-	var adjacent= [];
-	if (x - 1 >= 0 ) {
+	//returns array of adjacent cells
+	var adjacent = [];
+	if (x - 1 >= 0) {
 		adjacent.push(this.board[y][x - 1])
-		if (y + 1 < this.mapY ) {
-			adjacent.push(this.board[y + 1][x-1])
+		if (y + 1 < this.mapY) {
+			adjacent.push(this.board[y + 1][x - 1])
 		}
-		if (y - 1 >= 0 ) {
-			adjacent.push(this.board[y - 1][x-1])
+		if (y - 1 >= 0) {
+			adjacent.push(this.board[y - 1][x - 1])
 		}
 	}
-	if (y + 1 < this.mapY ) {
+	if (y + 1 < this.mapY) {
 		adjacent.push(this.board[y + 1][x])
 	}
-	if (x + 1 < this.mapX ) {
+	if (x + 1 < this.mapX) {
 		adjacent.push(this.board[y][x + 1])
-		if (y + 1 < this.mapY ) {
-			adjacent.push(this.board[y + 1][x+1])
+		if (y + 1 < this.mapY) {
+			adjacent.push(this.board[y + 1][x + 1])
 		}
-		if (y - 1 >= 0 ) {
-			adjacent.push(this.board[y - 1][x+1])
+		if (y - 1 >= 0) {
+			adjacent.push(this.board[y - 1][x + 1])
 		}
 	}
-	if (y - 1 >= 0 ) {
+	if (y - 1 >= 0) {
 		adjacent.push(this.board[y - 1][x])
 	}
 	return adjacent;
@@ -144,32 +144,32 @@ Game.prototype.updateCell = function (y, x) {
 	//update cell depending current state and eventually adjacent prior state
 	var cs = this.board[y][x];
 
-	switch(cs.state) {
-    case Game.EMPTY:
-		//nothing
-		break;
-    case Game.TAIL:
-		cs.state = Game.CONDUCTOR;
-        break;
-    case Game.HEAD:
-		cs.state = Game.TAIL;
-        break;
-    case Game.CONDUCTOR:
-		var adj = this.adjacentCells(y,x);
-		var heads = 0;
-		for (var i = adj.length - 1; i >= 0; i--) {
-			if (adj[i].priorState == Game.HEAD){
-				heads+=1;
+	switch (cs.state) {
+		case Game.EMPTY:
+			//nothing
+			break;
+		case Game.TAIL:
+			cs.state = Game.CONDUCTOR;
+			break;
+		case Game.HEAD:
+			cs.state = Game.TAIL;
+			break;
+		case Game.CONDUCTOR:
+			var adj = this.adjacentCells(y, x);
+			var heads = 0;
+			for (var i = adj.length - 1; i >= 0; i--) {
+				if (adj[i].priorState == Game.HEAD) {
+					heads += 1;
+				}
 			}
-		}
-		if (heads >=1 && heads <= 2) {
-			cs.state=Game.HEAD;
-		}
-        break;
+			if (heads >= 1 && heads <= 2) {
+				cs.state = Game.HEAD;
+			}
+			break;
 
-    default:
-       console.log("error updating cell", cs);
-}
+		default:
+			console.log("error updating cell", cs);
+	}
 
 
 }
@@ -187,26 +187,27 @@ Game.prototype.saveStates = function () {
 
 
 Game.prototype.refresh = function () {
-	//this> daGame: hugly bug fix
+	//this> daGame: ugly bug fix
 	daGame.saveStates();
 	for (var r = this.mapY - 1; r >= 0; r--) {
 		for (var c = this.mapX - 1; c >= 0; c--) {
-			daGame.updateCell(r,c);
+			daGame.updateCell(r, c);
 		}
 	}
 	console.log("refresh");
-	daGame.iteration +=1;
+	daGame.iteration += 1;
 
 }
 Game.prototype.autoRefresh = function () {
 
-    daGame.clock= window.setInterval(this.refresh, 800);
+	daGame.clock = window.setInterval(this.refresh, 800);
 
 }
 
 Game.prototype.autoRefreshStop = function () {
 
 	clearInterval(daGame.clock);
+	console.log("autoRefresh stopped")
 
 
 }

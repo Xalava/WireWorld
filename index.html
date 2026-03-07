@@ -1,145 +1,158 @@
 <!doctype html>
 <html class="no-js" lang="">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Wireworld - Cellular Automaton</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="apple-touch-icon" href="apple-touch-icon.png">
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Wireworld - Cellular Automaton</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/main.css">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+        integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-    </head>
-    <body>
-        <!--[if lt IE 8]>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+
+</head>
+
+<body>
+    <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <div class="container">
-            <header class=" jumbotron">
+    <div class="container">
+        <header class=" jumbotron">
 
-                <h1> Wireworld </h1>
-                <p>Simple logic circuit simulator  <a class="btn btn-info"  href="#Infos">Learn More</a></p>
+            <h1> Wireworld </h1>
+            <p>Simple logic circuit simulator <a class="btn btn-info" href="#Infos">Learn More</a></p>
 
-            </header>
+        </header>
 
-            <section id="game" class="row">
+        <section id="game" class="row">
 
-                <div class="col-md-12">
+            <div class="col-md-12">
 
-                    <table class="theGrid">
-                        <tr v-for="row in rows"> 
-                            <td  v-for="square in row" is="square-component" :sq="square">
-                            </td> 
-                        </tr>
-                    </table>
+                <table class="theGrid">
+                    <tr v-for="row in rows">
+                        <td v-for="square in row" is="square-component" :sq="square">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-md-12 text-center">
+                <br />
+                <div class="btn-group ">
+                    <button class="btn btn-default" onclick="daGame.refresh()">Refresh <span
+                            class="badge">{{cycle}}</span></button>
+                    <button class="btn btn-default" onclick="daGame.autoRefresh()">AutoRefresh </button>
+                    <button class="btn btn-default" onclick="daGame.autoRefreshStop()">Stop</button>
                 </div>
+            </div>
 
-                <div class="col-md-12 text-center">
-                    <br/>
-                    <div class="btn-group ">
-                        <button class="btn btn-default" onclick="daGame.refresh()">Refresh <span class="badge">{{cycle}}</span></button>
-                        <button class="btn btn-default" onclick="daGame.autoRefresh()">AutoRefresh </button>
-                        <button class="btn btn-default" onclick="daGame.autoRefreshStop()">Stop</button>
-                    </div>
-                </div>
+        </section>
 
-            </section>
-
-            <script type="text/x-template" id="square-template" >
+        <script type="text/x-template" id="square-template">
                 <td  class="text-center" :class="stateClass" v-on:click="sqLeftAction" @contextmenu.prevent="sqRightAction">
                   <span :class="{ 'glyphicon':true, 'glyphicon-flash': isHead}"></span>
 
                 </td>
             </script>
 
-            <section id="Infos" class="row">
-                        <h2>Principle</h2>
-                        <p>Wireworld is a cellular automaton. Sparkles are propagated along wires at each cycle. Despite it's simplicity, it allows to simulate advanced computers and is Turing complete
+        <section id="Infos" class="row">
+            <h2>Principle</h2>
+            <p>Wireworld is a cellular automaton. Sparkles are propagated along wires at each cycle. Despite its
+                apparent simplicity, it allows to simulate advanced computers and is Turing complete.</p>
 
-                        <h2>Use</h2>
-                        <p> Right click (or simple tap)→ put or remove a wire</p>
-                        <p> Left click (or long press) → put or remove a sparkle (Electron Head)</p>
-                        <p> Press the refresh or auto-refresh button to iterate</p>
+            <h2>Use</h2>
+            <p> Right click (or simple tap)→ put or remove a wire</p>
+            <p> Left click (or long press) → put or remove a sparkle (Electron Head)</p>
+            <p> Press the refresh or auto-refresh button to iterate</p>
 
-                        <h2>Rules</h2>
+            <h2>Rules</h2>
 
-                        <p>A Wireworld cell can be in one of four different states: <span class="empty"> Empty </span>, <span class="head">Electron head (<span class="glyphicon glyphicon-flash"></span>)</span>, <span class="tail"> Electron tail </span>, and <span class="connector"> Connector</span>
+            <p>A Wireworld cell can be in one of four different states: <span class="empty"> Empty </span>, <span
+                    class="head">Electron head (<span class="glyphicon glyphicon-flash"></span>)</span>, <span
+                    class="tail"> Electron tail </span>, and <span class="connector"> Connector</span>.</p>
 
-                        <p>As in all cellular automate, time proceeds in discrete steps called generations. Cells behave as follows:</p>
+            <p>As in all cellular automata, time proceeds in discrete steps called generations. Cells behave as follows:
+            </p>
 
-                        <ul>
-                            <li>Empty → Empty</li>
-                            <li><span class="head">Electron head</span> → <span class="tail">Electron tail</span></li>
-                            <li><span class="tail">Electron tail</span> → <span class="connector">Connector</span></li>
-                            <li><span class="connector">Connector</span>
-                                <ul class="deco-none">
-                                    <li> → <span class="head">Electron head</span> if exactly one or two of the neighboring cells are electron heads</li>
-                                    <li> → remains <span class="connector">connector</span> otherwise</li>
-                                </ul>
-                            </li>
-                        </ul>
+            <ul>
+                <li>Empty → Empty</li>
+                <li><span class="head">Electron head</span> → <span class="tail">Electron tail</span></li>
+                <li><span class="tail">Electron tail</span> → <span class="connector">Connector</span></li>
+                <li><span class="connector">Connector</span>
+                    <ul class="deco-none">
+                        <li> → <span class="head">Electron head</span> if exactly one or two of the neighboring cells
+                            are electron heads</li>
+                        <li> → remains <span class="connector">connector</span> otherwise</li>
+                    </ul>
+                </li>
+            </ul>
 
-                        <p>In the rules above, neighboring means one cell away in any direction, both orthogonal and diagonal.</p>
+            <p>In the rules above, neighboring means one cell away in any direction, both orthogonal and diagonal.</p>
 
-                        <h2> Logic gates</h2>
-                        <p> From there, you can build logic gates, taking signals in input and performing a logic operation :
-                        <ul class="media-list">
-                            <li class="media">
-                                <div class="media-left">
-                                  <a class="" href="#">
-                                    <img class="media-object" src="./img/two-diodes.gif" alt="Diodes image" width="">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                    <h4 class="media-heading">Diodes</h4>
-                                    If the sparkle comes from the three blocks side it goes through, otherwise it is stopped.
-                                </div>
-                            </li>
-                            <li class="media">
-                              <div class="media-body">
-                                <h4 class="media-heading">Basic computation</h4>
-                                "Or", "Xor" (exclusive or), and "And" functions
-                              </div>
-                                <div class="media-right">
-                                  <a class="" href="#">
-                                    <img class="media-object" src="./img/logic-doors.gif" alt="Diodes image" width="">
-                                  </a>
-                                </div>
-                            </li>
-                        </ul>
-
-                        <h2> Learn more </h2>
-                        <ul>
-                            <li>More information on wireworld on <a href="https://en.wikipedia.org/wiki/Wireworld"> Wikipedia</a></li>
-
-                            <li><a href="https://unnikked.ga/simulate-logic-circuits-wireworld/">Logic gates</a> in wireworld</li>
-                            <li>Full set of gates and <a href="http://karlscherer.com/Wireworld.html">logic devices</a>
-                            <li> An advance example from our friends in <a href="https://www.logre.eu/wiki/Projet_Wireworld/en">Grenoble</li>
+            <h2> Logic gates</h2>
+            <p>From there, you can build logic gates, taking signals in input and performing a logic operation:</p>
+            <ul class="media-list">
+                <li class="media">
+                    <div class="media-left">
+                        <a class="" href="#">
+                            <img class="media-object" src="./img/two-diodes.gif" alt="Diodes image" width="">
                         </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Diodes</h4>
+                        If the sparkle comes from the three blocks side it goes through, otherwise it is stopped.
+                    </div>
+                </li>
+                <li class="media">
+                    <div class="media-body">
+                        <h4 class="media-heading">Basic computation</h4>
+                        "Or", "Xor" (exclusive or), and "And" functions
+                    </div>
+                    <div class="media-right">
+                        <a class="" href="#">
+                            <img class="media-object" src="./img/logic-doors.gif" alt="Logic gates image" width="">
+                        </a>
+                    </div>
+                </li>
+            </ul>
 
-            </section>  
+            <h2> Learn more </h2>
+            <ul>
+                <li>More information on wireworld on <a href="https://en.wikipedia.org/wiki/Wireworld"> Wikipedia</a>
+                </li>
 
-            <footer class="row text-center">  
-                <p>With ♥ from <a href="https://www.linkedin.com/in/lavayssiere">Xavier </a></p>
-                  
-            </footer>
-        </div> <!-- endContainer -->
+                <li><a href="https://unnikked.ga/simulate-logic-circuits-wireworld/">Logic gates</a> in wireworld</li>
+                <li>Full set of gates and <a href="http://karlscherer.com/Wireworld.html">logic devices</a></li>
+                <li>An advanced example from our friends in <a
+                        href="https://www.logre.eu/wiki/Projet_Wireworld/en">Grenoble</a></li>
+            </ul>
+        </section>
+
+        <footer class="row text-center">
+            <p>With ♥ from <a href="https://www.linkedin.com/in/lavayssiere">Xavier </a></p>
+
+        </footer>
+    </div> <!-- endContainer -->
 
 
-        <script src="js/vendor/vue.js"></script>
+    <script src="js/vendor/vue.js"></script>
 
-        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-        <script src="js/plugins.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
+    <script src="js/plugins.js"></script>
 
-        <script src="js/game.js"></script>
-        <script src="js/main.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/main.js"></script>
 
-    </body>
+</body>
+
 </html>
