@@ -44,11 +44,10 @@
 
             <div class="col-md-12 text-center">
                 <br />
+                <div class="btn btn-default" disabled>Generation <span class="badge">{{cycle}}</span></div>
                 <div class="btn-group ">
-                    <button class="btn btn-default" onclick="daGame.refresh()">Refresh <span
-                            class="badge">{{cycle}}</span></button>
-                    <button class="btn btn-default" onclick="daGame.autoRefresh()">AutoRefresh </button>
-                    <button class="btn btn-default" onclick="daGame.autoRefreshStop()">Stop</button>
+                    <button class="btn btn-default" id="btn-step" onclick="daGame.refresh()" title="Advance one generation" style="display:none;">> Step</button>
+                    <button class="btn btn-default" id="btn-playpause" onclick="daGame.toggleAutoRefresh()">&#9654; Play</button>
                 </div>
             </div>
 
@@ -67,9 +66,9 @@
                 apparent simplicity, it allows to simulate advanced computers and is Turing complete.</p>
 
             <h2>Use</h2>
-            <p> Right click (or simple tap)→ put or remove a wire</p>
-            <p> Left click (or long press) → put or remove a sparkle (Electron Head)</p>
-            <p> Press the refresh or auto-refresh button to iterate</p>
+            <p> Left click (or simple tap) → put or remove a wire</p>
+            <p> Right click (or long press) → put or remove a sparkle (Electron Head)</p>
+            <p> <em>Play/Pause</em> →  run/pause auto generations (<em>Step</em> advances one generation)</p>
 
             <h2>Rules</h2>
 

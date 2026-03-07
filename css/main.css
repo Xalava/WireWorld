@@ -123,7 +123,6 @@ footer {
 
 .tail{
     background-color: #FF4000;
-;
 }
 
 .connector {
@@ -138,15 +137,15 @@ footer {
     margin: auto auto;
 }
 td{
-    width: 30px; 
-    height:30px;
-    border: 0.4px solid #AAA;
- 
+    width: 30px;
+    height: 30px;
+    border: 0.5px solid rgba(200,200,200,0.48);
+    cursor: pointer;
 }
 
 #Infos {
-    color: #DDD;
-    background-color:rgba(50,50,50,0.7);
+    color: #CCC;
+    background-color: rgba(50,50,50,0.7);
     padding: 2rem;
 }
 

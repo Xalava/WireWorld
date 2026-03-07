@@ -199,16 +199,24 @@ Game.prototype.refresh = function () {
 
 }
 Game.prototype.autoRefresh = function () {
-
+	clearInterval(daGame.clock);
 	daGame.clock = window.setInterval(this.refresh, 800);
-
+	document.getElementById('btn-playpause').innerHTML = '&#9646;&#9646; Pause';
+	document.getElementById('btn-step').style.display = 'none';
 }
 
 Game.prototype.autoRefreshStop = function () {
-
 	clearInterval(daGame.clock);
-	console.log("autoRefresh stopped")
+	daGame.clock = null;
+	document.getElementById('btn-playpause').innerHTML = '&#9654; Play';
+	document.getElementById('btn-step').style.display = '';
+}
 
-
+Game.prototype.toggleAutoRefresh = function () {
+	if (daGame.clock) {
+		daGame.autoRefreshStop();
+	} else {
+		daGame.autoRefresh();
+	}
 }
 // count feature, timer ...
